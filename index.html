@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="firefly-container"></div>
+    <div class="butterfly-container"></div>
+
+    <h1>My Digital Bouquet for You 💕</h1>
+
+    <div class="bouquet">
+      <div class="wrapper"></div>
+      <div class="wrapper-top"></div>
+      <div class="bow-ribbon">
+        <div class="loop left"></div>
+        <div class="loop right"></div>
+        <div class="knot"></div>
+        <div class="tail left-tail"></div>
+        <div class="tail right-tail"></div>
+      </div>
+      <div class="tag">To: Kim 💘</div>
+      <div
+        class="flower center"
+        data-song="Music/Bonvoyage.mp3"
+        data-title="Bon Voyage - Kim Daniel"
+        data-img="Img/Bonvoyage.png"
+      >
+        <img src="rose.png" alt="Rose" />
+      </div>
+      <div
+        class="flower left"
+        data-song="Music/Love.mp3"
+        data-title="Love - Wave to Earth"
+        data-img="Img/Love.png"
+      >
+        <img src="rose.png" alt="Rose" />
+      </div>
+      <div
+        class="flower right"
+        data-song="Music/Ikot.mp3"
+        data-title="Ikot - Over October"
+        data-img="Img/Ikot.png"
+      >
+        <img src="rose.png" alt="Rose" />
+      </div>
+
+      <div class="envelope-icon" id="envelope" onclick="toggleModal()">
+        <div class="flap"></div>
+        <div class="heart-stamp">❤️</div>
+      </div>
+    </div>
+    <div class="envelope-modal" id="modal">
+      <div class="modal-content">
+        <img src="flower.svg" alt="Flower" class="letter-flower" />
+
+        <div class="modal-heart"></div>
+
+        <p class="letter-line-t">Lab (Maasgad),</p>
+
+        <p class="letter-line">
+          I know this is just a simple gift, but I hope you appreciate it. It
+          took time, effort, and a whole lot of errors and bugs — and even
+          though it was tiring, I have no regrets. Because you're worth it.
+        </p>
+
+        <p class="letter-line">
+          I'm sorry if it ever feels like I don't care — but the truth is, I do.
+          I always have, and I always will. Please take care of yourself for me,
+          especially while I can’t be there. See you soon, lab.
+        </p>
+
+        <p class="letter-line-2" style="margin-top: 30px">
+          I love you palagi,<br />
+          <strong>James 💖</strong>
+        </p>
+
+        <button onclick="toggleModal()">Close</button>
+      </div>
+    </div>
+
+    <div class="music-popup" id="musicPlayer">
+      <img src="flower.svg" alt="Flower" class="player-flower" />
+      <img
+        alt="Cute Pic"
+        class="music-image"
+        id="trackImage"
+        style="display: none"
+      />
+      <div class="player-header">Now Playing 🎶</div>
+      <div id="trackTitle" class="track-title">Choose a flower 🌹</div>
+
+      <!-- Custom Player Goes -->
+      <div class="custom-audio-player">
+        <audio id="audio" preload="auto"></audio>
+
+        <div class="player-controls">
+          <button id="playPauseBtn" class="play-btn">▶</button>
+          <span id="currentTime" class="time">0:00</span>
+
+          <input type="range" id="seekBar" class="seek-bar" value="0" />
+
+          <span id="duration" class="time">0:00</span>
+          <button id="muteBtn" class="mute-btn">🔊</button>
+        </div>
+      </div>
+
+      <button onclick="closeMusic()">Close</button>
+    </div>
+
+    <!-- Floating hearts container -->
+    <div id="hearts-container"></div>
+    <audio
+      id="letterAudio"
+      src="Music/A_thousand_years.mp3"
+      preload="auto"
+    ></audio>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,913 @@
+body {
+  background: linear-gradient(180deg, #ffe3ec, #fff0f5, #e6fff5);
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  padding: 50px;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.5rem;
+  color: #c9184a;
+  margin-top: 20px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+/* 🪻 Bouquet container */
+.bouquet {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+/* 🌹 General flower style */
+.flower {
+  position: absolute;
+  width: 90px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0);
+  overflow: visible;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* 🌼 Flower image */
+.flower img {
+  width: 100%;
+  display: block;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 🌿 Stem */
+.flower::after {
+  content: "";
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  width: 6px;
+  height: 80px;
+  background: #65b36e;
+  border-radius: 3px;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+/* 🍃 Leaves */
+.flower::before {
+  content: "";
+  position: absolute;
+  top: 115%;
+  left: 50%;
+  width: 40px;
+  height: 20px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -18px 2px #6dcf87, 18px 2px #6dcf87;
+  transform: translateX(-50%) rotate(10deg);
+  z-index: -1;
+}
+
+/* 🏹 Bouquet arrangement */
+.flower.center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Prevent it from rotating too wildly when hovered */
+.flower.center:hover {
+  animation: centerWobble 0.4s ease-in-out;
+}
+
+.flower.left:hover {
+  animation: leftWobble 0.5s ease-in-out;
+}
+
+.flower.right:hover {
+  animation: rightWobble 0.5s ease-in-out;
+}
+
+.flower.left {
+  top: 60px;
+  left: 20%;
+  transform: rotate(-15deg);
+}
+
+.flower.right {
+  top: 60px;
+  right: 20%;
+  transform: rotate(15deg);
+}
+
+/* 💌 Popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: white;
+  padding: 25px 35px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  transition: transform 0.3s ease-in-out;
+}
+
+.popup.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #c9184a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* 💕 Floating Heart */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 1.4s ease-out forwards;
+  color: #ff69b4;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.6);
+  }
+}
+
+@keyframes centerWobble {
+  0% {
+    transform: translateX(-50%) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) scale(1.05) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05) rotate(3deg);
+  }
+  75% {
+    transform: translateX(-50%) scale(1.02) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(-50%) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes leftWobble {
+  0% {
+    transform: rotate(-15deg) scale(1);
+  }
+  25% {
+    transform: rotate(-20deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(-10deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(-17deg) scale(1.02);
+  }
+  100% {
+    transform: rotate(-15deg) scale(1);
+  }
+}
+
+@keyframes rightWobble {
+  0% {
+    transform: rotate(15deg) scale(1);
+  }
+  25% {
+    transform: rotate(20deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(17deg) scale(1.02);
+  }
+  100% {
+    transform: rotate(15deg) scale(1);
+  }
+}
+
+@keyframes bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🎁 Realistic Wrapping Paper */
+.wrapper {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 170px;
+  background: linear-gradient(145deg, #fbe0ea, #f7c6d3);
+  clip-path: polygon(50% 0%, 95% 35%, 100% 100%, 0% 100%, 5% 35%);
+  z-index: 0;
+  border: 1px solid #f4b8c5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+/* 🎀 Top Folded Wrapper (reversed) */
+.wrapper-top {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(-1);
+  width: 240px;
+  height: 170px;
+  background: linear-gradient(135deg, #f8cdd7, #fce4ec);
+  clip-path: polygon(50% 0%, 95% 35%, 100% 100%, 0% 100%, 5% 35%);
+  z-index: 0;
+  border: 1px solid #f4b8c5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  opacity: 0.9;
+}
+
+/* 🎀 Ribbon Bow */
+.bow-ribbon {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+  z-index: 6;
+  animation: ribbonSwing 4s ease-in-out infinite;
+}
+
+/* 🎀 Loops */
+.bow-ribbon .loop {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background: #c9184a;
+  border-radius: 20%;
+}
+
+.bow-ribbon .loop.left {
+  left: 0;
+  transform: rotate(-20deg);
+}
+
+.bow-ribbon .loop.right {
+  right: 0;
+  transform: rotate(20deg);
+}
+
+/* 🔴 Knot */
+.bow-ribbon .knot {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #a50e3c;
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔻 Tails */
+.bow-ribbon .tail {
+  position: absolute;
+  bottom: -70px;
+  width: 30px;
+  height: 100px;
+  background: #c9184a;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.bow-ribbon .left-tail {
+  left: -18px;
+  transform: rotate(45deg);
+}
+
+.bow-ribbon .right-tail {
+  right: -18px;
+  transform: rotate(-45deg);
+}
+
+@keyframes ribbonSwing {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+@keyframes tagSwing {
+  0% {
+    transform: translateX(-50%) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-5deg);
+  }
+}
+
+.tag:hover {
+  animation: tagSwing 1s ease-in-out;
+}
+
+.tag {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  background: #fff8f0;
+  border: 2px solid #c9184a;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #c9184a;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 6;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Tag string */
+.tag::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 2px;
+  height: 12px;
+  background: #c9184a;
+  transform: translateX(-50%);
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #ffe6ea, #ffb6c1, #ff4d6d);
+
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleDust 1.4s ease-out forwards;
+  z-index: 10;
+
+  opacity: 0.9;
+}
+
+@keyframes sparkleDust {
+  0% {
+    opacity: 1;
+    transform: scale(0.8) translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2)
+      translate(calc(-60px + 120px * var(--x)), calc(-60px + 120px * var(--y)));
+  }
+}
+
+.firefly-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffb6c1, #ff69b4, #ff1493);
+  border-radius: 50%;
+  box-shadow: 0 0 12px #99ffcc;
+  opacity: 0.6;
+  animation: floatFirefly 10s linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes floatFirefly {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-50px) translateX(30px) scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(-30px) scale(1.2);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-150px) translateX(30px) scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-200px) translateX(0px) scale(1);
+    opacity: 0;
+  }
+}
+
+.butterfly-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.butterfly {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  animation: floatButterfly 10s linear infinite;
+  opacity: 0.9;
+}
+
+.butterfly .wing {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(251, 177, 201);
+  border-radius: 50% 50% 50% 50%;
+}
+
+.butterfly .left {
+  left: 0;
+  top: 0;
+  transform: rotate(-25deg);
+}
+
+.butterfly .right {
+  right: 0;
+  top: 0;
+  transform: rotate(25deg);
+}
+
+.butterfly .body {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 4px;
+  height: 20px;
+  background-color: #a50e3c;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+@keyframes floatButterfly {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(40px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(-250px) translateX(-60px) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+/* ✉️ Envelope container */
+.envelope-icon {
+  position: absolute;
+  bottom: -60px;
+  right: -20px;
+  width: 90px;
+  height: 60px;
+  background: #ffffff;
+  border: 2px solid #c9184a;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 7;
+  overflow: hidden;
+  transform: rotate(-10deg);
+}
+
+.envelope-icon:hover {
+  transform: rotate(-5deg) translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+}
+
+.envelope-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.envelope-modal.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 🔺 Envelope flap */
+.envelope-icon .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #ffffff;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  border-bottom: 2px solid #c9184a;
+  z-index: 1;
+}
+
+/* ❤️ Heart stamp */
+.heart-stamp {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Plain diagonal lines (folds) */
+.envelope-icon::before,
+.envelope-icon::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 120%;
+  background: #c9184a;
+  top: -30px;
+  left: 50%;
+  transform-origin: bottom;
+  z-index: 2;
+  opacity: 0.6;
+}
+
+.envelope-icon::before {
+  transform: rotate(45deg) translateX(-50%);
+}
+
+.envelope-icon::after {
+  transform: rotate(-45deg) translateX(-50%);
+}
+
+.envelope-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 240, 245, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.envelope-modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fffdfd;
+  border: 2px dashed #c9184a;
+  padding: 24px 20px;
+  border-radius: 12px;
+  font-family: "Dancing Script", cursive;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #5c2a2a;
+  position: relative;
+  animation: popFade 0.4s ease-out forwards;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 340px;
+  width: 90%;
+  text-align: left;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.letter-line-t {
+  margin-bottom: 30px;
+}
+.letter-line {
+  text-align: justify;
+  text-indent: 2em;
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.letter-line-2 {
+  text-align: right;
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+.modal-heart {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.letter-flower {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 90px;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #c9184a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #a4133c;
+  transform: scale(1.05);
+}
+
+.modal-content.hide {
+  animation: popFadeOut 0.4s ease-out forwards;
+}
+
+@keyframes popFade {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes popFadeOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+
+.envelope-icon {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.envelope-icon:hover {
+  transform: rotate(-5deg) translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+}
+
+.envelope-icon:active {
+  transform: rotate(-5deg) translateY(-3px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: grabbing;
+}
+
+.envelope-icon.hidden {
+  display: none;
+}
+
+.music-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  transform: translate(-50%, -50%) scale(0);
+  background: #fff0f5;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.music-popup.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.music-popup img.music-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 2px solid #c9184a;
+}
+
+.music-popup .player-header {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #c9184a;
+}
+
+.music-popup audio {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.music-popup button {
+  padding: 8px 16px;
+  background: #c9184a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.music-popup button:hover {
+  background: #a4133c;
+  transform: scale(1.05);
+}
+
+.track-title {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 8px;
+  text-align: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.track-title span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollTitle 8s linear infinite;
+}
+
+@keyframes scrollTitle {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.custom-audio-player {
+  background: #fff5fa;
+  border-radius: 10px;
+  padding: 12px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  font-family: "Segoe UI", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+}
+
+.play-btn,
+.mute-btn {
+  background: #c9184a;
+  color: white;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.play-btn:hover,
+.mute-btn:hover {
+  background: #a3133b;
+}
+
+.seek-bar {
+  flex: 1;
+  height: 3px;
+  background: #ddd;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  margin: 0 4px;
+}
+
+.seek-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  background: #c9184a;
+  border-radius: 50%;
+  border: none;
+}
+
+.time {
+  font-size: 10px;
+  color: #555;
+  min-width: 30px;
+  text-align: center;
+}
+
+.music-image {
+  width: 120px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.music-image[src] {
+  opacity: 1;
+}
+
+.player-flower {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 90px;
+  height: auto;
+  z-index: 10;
+  transform: rotate(10deg);
+}
